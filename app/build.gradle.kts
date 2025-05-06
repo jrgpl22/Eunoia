@@ -40,6 +40,8 @@ dependencies {
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
     annotationProcessor("androidx.room:room-compiler:2.6.0")
     implementation("com.github.bumptech.glide:glide:4.15.1")
+
+
     annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
     implementation(libs.appcompat)
     implementation(libs.material)

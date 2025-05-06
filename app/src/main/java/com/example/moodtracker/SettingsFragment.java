@@ -7,26 +7,35 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
-import static android.content.Context.MODE_PRIVATE;
-
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import java.io.InputStream;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class SettingsFragment extends Fragment {
     private TextView accName;
-    private Button logoutButton;
-    private Button deleteDataButton;
-    private Button changePasswordButton;
+    private Button logoutButton, deleteDataButton, changePasswordButton;
+    private Button notificationButton, editProfileButton, accountButton, helpButton;
+    private ImageView profileImgButton; // ✅ Changed to ImageView
     private MoodDatabaseHelper dbHelper;
     private String username;
-    private Button notificationButton;
-    private Button editProfileButton, accountButton, helpButton;
+
+    private ActivityResultLauncher<String> imagePickerLauncher;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,6 +50,8 @@ public class SettingsFragment extends Fragment {
         changePasswordButton = view.findViewById(R.id.changePasswordBtn);
         accountButton = view.findViewById(R.id.accountButton);
         helpButton = view.findViewById(R.id.helpButton);
+        editProfileButton = view.findViewById(R.id.editbtn);
+        profileImgButton = view.findViewById(R.id.profileimg); // ✅ Using ImageView
 
         SharedPreferences prefs = requireActivity().getSharedPreferences("MoodTracker", MODE_PRIVATE);
         username = prefs.getString("loggedInUser", "");
@@ -54,11 +65,35 @@ public class SettingsFragment extends Fragment {
         });
         accountButton.setOnClickListener(v -> openAboutPage());
         helpButton.setOnClickListener(v -> openHelpPage());
-        // Navigate to Change Password Screen
         changePasswordButton.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), ChangePassword.class);
             startActivity(intent);
         });
+
+        editProfileButton.setOnClickListener(v -> {
+            imagePickerLauncher.launch("image/*");
+        });
+
+        imagePickerLauncher = registerForActivityResult(
+                new ActivityResultContracts.GetContent(),
+                new ActivityResultCallback<Uri>() {
+                    @Override
+                    public void onActivityResult(Uri uri) {
+                        if (uri != null) {
+                            try {
+                                InputStream inputStream = requireContext().getContentResolver().openInputStream(uri);
+                                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+
+                                // Set the new profile image
+                                profileImgButton.setImageBitmap(bitmap);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                });
+
+
 
         return view;
     }
@@ -66,17 +101,14 @@ public class SettingsFragment extends Fragment {
     private void openAboutPage() {
         Intent intent = new Intent(requireContext(), AboutActivity.class);
         startActivity(intent);
-
     }
+
     private void openHelpPage() {
         Intent intent = new Intent(requireContext(), HelpActivity.class);
         startActivity(intent);
     }
 
     private void showDeleteDataDialog() {
-        // Import at the top of your file:
-        // import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-
         new MaterialAlertDialogBuilder(requireContext())
                 .setTitle("Delete All Data")
                 .setMessage("Are you sure you want to delete all your mood data? This action cannot be undone.")
@@ -84,7 +116,6 @@ public class SettingsFragment extends Fragment {
                     SQLiteDatabase db = dbHelper.getWritableDatabase();
                     db.delete("mood", "username = ?", new String[]{username});
                     db.close();
-
                     new MaterialAlertDialogBuilder(requireContext())
                             .setTitle("Success")
                             .setMessage("All mood data has been deleted.")
@@ -101,12 +132,10 @@ public class SettingsFragment extends Fragment {
                 .setMessage("Are you sure you want to logout?")
                 .setPositiveButton("Yes", (dialog, which) -> {
                     cancelUserNotifications();
-
                     SharedPreferences prefs = requireActivity().getSharedPreferences("MoodTracker", MODE_PRIVATE);
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.remove("loggedInUser");
                     editor.apply();
-
                     Intent intent = new Intent(getActivity(), Entrance.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
