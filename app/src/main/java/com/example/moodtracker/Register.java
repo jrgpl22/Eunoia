@@ -46,8 +46,10 @@ public class Register extends AppCompatActivity {
         });
 
         registerbtn.setOnClickListener(view -> {
-            String username = username2.getText().toString();
+            String rawUsername = username2.getText().toString();
             String password = password2.getText().toString();
+
+            String username = rawUsername.trim().replaceAll("\\s+", "");
 
             if (username.isEmpty() || password.isEmpty()) {
                 error2.setText("Insert Value");
