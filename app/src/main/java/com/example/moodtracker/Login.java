@@ -40,7 +40,6 @@ public class Login extends AppCompatActivity {
         Button registerBtn = findViewById(R.id.register);
         ImageView gifImageView = findViewById(R.id.puppy2);
 
-        // Load GIF using Glide
         Glide.with(this)
                 .asGif()
                 .load(R.drawable.puppy2)

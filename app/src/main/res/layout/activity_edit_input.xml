@@ -13,6 +13,87 @@
         android:background="@drawable/here_layout">
 
         <TextView
+            android:id="@+id/textView10"
+            android:layout_width="64dp"
+            android:layout_height="23dp"
+            android:layout_marginStart="54dp"
+            android:layout_marginEnd="44dp"
+            android:fontFamily="sans-serif-thin"
+            android:text="SAD"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/textView8"
+            app:layout_constraintStart_toEndOf="@+id/textView9"
+            app:layout_constraintTop_toBottomOf="@+id/sad" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="64dp"
+            android:layout_height="23dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginBottom="156dp"
+            android:fontFamily="sans-serif-thin"
+            android:text="FEAR"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fear" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="88dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginBottom="158dp"
+            android:fontFamily="sans-serif-thin"
+            android:text="ANGER"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/angry" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="64dp"
+            android:layout_height="23dp"
+            android:layout_marginStart="54dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="sans-serif-thin"
+            android:text="SHY"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/sad"
+            app:layout_constraintEnd_toStartOf="@+id/textView2"
+            app:layout_constraintStart_toEndOf="@+id/textView3"
+            app:layout_constraintTop_toBottomOf="@+id/calm" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="64dp"
+            android:layout_height="23dp"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="sans-serif-thin"
+            android:text="JOY"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/fear"
+            app:layout_constraintEnd_toStartOf="@+id/textView4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/happy"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
             android:id="@+id/textView"
             android:layout_width="381dp"
             android:layout_height="92dp"
@@ -137,6 +218,25 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.517"
             app:srcCompat="@drawable/bored" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="84dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginBottom="15dp"
+            android:fontFamily="sans-serif-thin"
+            android:text="BORED"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/angry"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView4"
+            app:layout_constraintTop_toBottomOf="@+id/neutral"
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,7 @@ package com.example.moodtracker;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -11,8 +12,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 
+import com.bumptech.glide.Glide;
+
+
 public class ChangePassword extends AppCompatActivity {
     private EditText oldPassword, newPassword, confirmPassword;
+    private ImageView gifImageView;
     private ImageView toggleOldPass, toggleNewPass, toggleConfirmPass;
     private Button changePasswordButton;
     private boolean isOldPassVisible = false, isNewPassVisible = false, isConfirmPassVisible = false;
@@ -22,6 +27,8 @@ public class ChangePassword extends AppCompatActivity {
     private static final String PREFS_NAME = "MoodTracker";
     private static final String KEY_USERNAME = "loggedInUser";
     private static final int MIN_PASSWORD_LENGTH = 8;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +47,11 @@ public class ChangePassword extends AppCompatActivity {
             finish();
             return;
         }
-
+        gifImageView = findViewById(R.id.puppy2);
+        Glide.with(this)
+                .asGif()
+                .load(R.drawable.puppy2)
+                .into(gifImageView);
         // Initialize Views
         oldPassword = findViewById(R.id.oldPassword);
         newPassword = findViewById(R.id.newPassword);
