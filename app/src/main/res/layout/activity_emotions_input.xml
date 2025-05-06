@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dateCF"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EmotionsInput">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/here_layout">
+
+        <ImageView
+            android:id="@+id/calm"
+            android:layout_width="91dp"
+            android:layout_height="91dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/neutral"
+            app:layout_constraintStart_toEndOf="@+id/happy"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.529"
+            app:srcCompat="@drawable/embarressed" />
+
+        <ImageView
+            android:id="@+id/fear"
+            android:layout_width="91dp"
+            android:layout_height="91dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="39dp"
+            android:layout_marginBottom="139dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/sad"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/happy"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/fear" />
+
+        <ImageView
+            android:id="@+id/sad"
+            android:layout_width="91dp"
+            android:layout_height="91dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/angry"
+            app:layout_constraintStart_toEndOf="@+id/fear"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.732"
+            app:srcCompat="@drawable/sadness" />
+
+        <ImageView
+            android:id="@+id/angry"
+            android:layout_width="91dp"
+            android:layout_height="91dp"
+            android:layout_marginEnd="33dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.965"
+            app:layout_constraintStart_toEndOf="@+id/sad"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.732"
+            app:srcCompat="@drawable/anger" />
+
+        <ImageView
+            android:id="@+id/happy"
+            android:layout_width="91dp"
+            android:layout_height="91dp"
+            android:layout_marginStart="35dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/calm"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.529"
+            app:srcCompat="@drawable/joyful" />
+
+        <ImageView
+            android:id="@+id/neutral"
+            android:layout_width="91dp"
+            android:layout_height="91dp"
+            android:layout_marginEnd="33dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/calm"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.529"
+            app:srcCompat="@drawable/bored" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="381dp"
+            android:layout_height="92dp"
+            android:layout_marginTop="156dp"
+            android:text="How are you feeling today?"
+            android:textAlignment="center"
+            android:textColor="#64381A"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.533"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/dateinput"
+            android:layout_width="202dp"
+            android:layout_height="34dp"
+            android:layout_marginTop="12dp"
+            android:text="date"
+            android:textAlignment="center"
+            android:textColor="#64381A"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="31dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.042"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/back" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

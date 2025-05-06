@@ -1,0 +1,31 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/calendar"
+        android:background="@drawable/nav_item_background"
+        android:icon="@drawable/calendar"
+        android:title="Calendar" />
+
+    <item
+        android:id="@+id/notes"
+        android:title="Diary"
+        android:icon="@drawable/notes"
+        android:background="@drawable/nav_item_background"/>
+
+    <item
+        android:id="@+id/fab_placeholder"
+        android:title=""
+        android:enabled="false"
+        android:background="@drawable/nav_item_background"/>
+
+    <item
+        android:id="@+id/stats"
+        android:title="Statistics"
+        android:icon="@drawable/stats"
+        android:background="@drawable/nav_item_background"/>
+
+    <item
+        android:id="@+id/settings"
+        android:title="Settings"
+        android:icon="@drawable/settings"
+        android:background="@drawable/nav_item_background"/>
+</menu>

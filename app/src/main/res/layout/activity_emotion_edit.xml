@@ -1,0 +1,108 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/here_layout"
+    tools:context=".EmotionEdit">
+
+    <Button
+        android:id="@+id/save2"
+        android:layout_width="102dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:text="Save"
+        app:backgroundTint="#64381a"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/emotionCF2"
+        android:layout_width="362dp"
+        android:layout_height="149dp"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="172dp"
+        android:layout_marginEnd="131dp"
+        android:layout_marginBottom="28dp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/textCF2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/calm" />
+
+    <ImageView
+        android:id="@+id/x2"
+        android:layout_width="43dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/x"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/dateCNFRM2"
+        android:layout_width="234dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="124dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/emotionCF2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textCF2"
+        android:layout_width="244dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="28dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emotionCF2" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="339dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="7dp"
+        android:fadeScrollbars="false"
+        android:fillViewport="true"
+        android:nestedScrollingEnabled="true"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textCF2">
+
+        <EditText
+            android:id="@+id/notesInput2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:fadeScrollbars="false"
+            android:gravity="top|start"
+            android:hint="Add your notes here..."
+            android:inputType="textMultiLine"
+            android:minHeight="200dp"
+            android:padding="10dp"
+            android:scrollbars="vertical"
+            android:textCursorDrawable="@null" />
+
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,6 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Circular Image Style -->
+    <style name="CircleShape">
+        <item name="cornerSize">50%</item>
+    </style>
+</resources>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dateCF"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/here_layout"
+    tools:context=".EmotionInputted">
+
+    <ImageView
+        android:id="@+id/back2"
+        android:layout_width="31dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.042"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back" />
+
+    <TextView
+        android:id="@+id/textCF3"
+        android:layout_width="214dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="362dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emotionCF3" />
+
+    <TextView
+        android:id="@+id/dateCNFRM3"
+        android:layout_width="234dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="96dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/emotionCF3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.546"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/emotionCF3"
+        android:layout_width="362dp"
+        android:layout_height="149dp"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="144dp"
+        android:layout_marginEnd="131dp"
+        android:layout_marginBottom="28dp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/textCF3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/calm" />
+
+    <ImageView
+        android:id="@+id/dots"
+        android:layout_width="34dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/dots" />
+
+    <ScrollView
+        android:layout_width="339dp"
+        android:layout_height="340dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="7dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textCF3">
+
+        <TextView
+            android:id="@+id/notesDisplay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Notes will be displayed here"
+            android:textSize="16sp" />
+
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

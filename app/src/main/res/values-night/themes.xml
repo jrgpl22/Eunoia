@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.MoodTracker" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#c47930</item> <!-- Primary color -->
+        <item name="colorPrimaryVariant">#c47930</item> <!-- Primary color variant -->
+        <item name="colorOnPrimary">#000000</item> <!-- Text/icon color on primary -->
+        <item name="colorControlNormal">#FFFFFF</item>
+
+        <!-- Ensure Material Components are using the colorPrimary -->
+        <item name="materialButtonStyle">@style/CustomButtonStyle</item>
+    </style>
+
+    <style name="Theme.MoodTracker" parent="Base.Theme.MoodTracker" />
+
+    <!-- Custom button style that explicitly uses the theme's colorPrimary -->
+    <style name="CustomButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">#64381A</item>
+        <item name="android:textColor">@color/brownishe</item>
+    </style>
+</resources>

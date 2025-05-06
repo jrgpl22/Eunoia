@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/settings_layout"
+    tools:context=".SettingsFragment">
+
+    <Button
+        android:id="@+id/helpButton"
+        android:layout_width="300dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="220dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="g"
+        android:padding="5dp"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/accountButton"
+        android:layout_width="306dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="168dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="y"
+        android:padding="5dp"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.462"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/changePasswordBtn"
+        android:layout_width="308dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="54dp"
+        android:layout_marginBottom="332dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/notifation"
+        android:layout_width="308dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="54dp"
+        android:layout_marginBottom="388dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="notif"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/delete_data"
+        android:layout_width="308dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="54dp"
+        android:layout_marginBottom="276dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/ACC_NAME"
+        android:layout_width="171dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="158dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textColor="#FAEEE5"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.816"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="307dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="54dp"
+        android:layout_marginBottom="105dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Logout button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

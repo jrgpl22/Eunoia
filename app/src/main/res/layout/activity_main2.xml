@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/layout"
+    tools:context=".Loading">
+
+    <ImageView
+        android:id="@+id/bored"
+        android:layout_width="34dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="144dp"
+        android:src="@drawable/bored"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/fear"
+        app:layout_constraintStart_toEndOf="@+id/shy" />
+
+    <ImageView
+        android:id="@+id/fear"
+        android:layout_width="34dp"
+        android:layout_height="32dp"
+
+        android:layout_marginEnd="85dp"
+        android:layout_marginBottom="144dp"
+        android:src="@drawable/fear"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/bored" />
+
+    <ImageView
+        android:id="@+id/sad"
+        android:layout_width="34dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="144dp"
+        android:src="@drawable/sadness"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/anger"
+        app:layout_constraintStart_toEndOf="@+id/joy" />
+
+    <ImageView
+        android:id="@+id/anger"
+        android:layout_width="34dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="144dp"
+        android:src="@drawable/anger"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/shy"
+        app:layout_constraintStart_toEndOf="@+id/sad" />
+
+    <ImageView
+        android:id="@+id/shy"
+        android:layout_width="34dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="144dp"
+        android:src="@drawable/embarressed"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/bored"
+        app:layout_constraintStart_toEndOf="@+id/anger" />
+
+    <ImageView
+        android:id="@+id/joy"
+        android:layout_width="34dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginBottom="144dp"
+        android:src="@drawable/joyful"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/sad"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/puppyf"
+        android:layout_width="221dp"
+        android:layout_height="191dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.452" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Eunoia</string>
+    <string name="edit">MoodTracker</string>
+    <string name="back"><![CDATA[ ]]></string>
+    <string name="forward"><![CDATA[ ]]></string>
+    <string name="image_button">Description of your image button</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
