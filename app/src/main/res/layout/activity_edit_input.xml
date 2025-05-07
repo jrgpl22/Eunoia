@@ -19,46 +19,48 @@
             android:layout_marginStart="54dp"
             android:layout_marginEnd="44dp"
             android:fontFamily="@font/baloo_da"
+            android:textColor="#663E20"
             android:text="SAD"
             android:textAlignment="center"
             android:textSize="20sp"
             android:textStyle="normal"
             app:layout_constraintEnd_toStartOf="@+id/textView8"
             app:layout_constraintStart_toEndOf="@+id/textView9"
-            android:textColor="#663E20"
             app:layout_constraintTop_toBottomOf="@+id/sad" />
 
         <TextView
             android:id="@+id/textView9"
             android:layout_width="64dp"
             android:layout_height="23dp"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="56dp"
             android:layout_marginBottom="156dp"
             android:fontFamily="@font/baloo_da"
             android:text="FEAR"
             android:textAlignment="center"
+            android:textColor="#663E20"
             android:textSize="20sp"
             android:textStyle="normal"
-            android:textColor="#663E20"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fear" />
+            app:layout_constraintTop_toBottomOf="@+id/fear"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/textView8"
             android:layout_width="88dp"
             android:layout_height="28dp"
-            android:layout_marginEnd="28dp"
+            android:layout_marginEnd="44dp"
             android:layout_marginBottom="158dp"
             android:fontFamily="@font/baloo_da"
             android:text="ANGER"
             android:textAlignment="center"
+            android:textColor="#663E20"
             android:textSize="20sp"
             android:textStyle="normal"
-            android:textColor="#663E20"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/angry" />
+            app:layout_constraintTop_toBottomOf="@+id/angry"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/textView4"
@@ -69,10 +71,10 @@
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="20dp"
             android:fontFamily="@font/baloo_da"
+            android:textColor="#663E20"
             android:text="SHY"
             android:textAlignment="center"
             android:textSize="20sp"
-            android:textColor="#663E20"
             android:textStyle="normal"
             app:layout_constraintBottom_toTopOf="@+id/sad"
             app:layout_constraintEnd_toStartOf="@+id/textView2"
@@ -85,11 +87,11 @@
             android:layout_height="23dp"
             android:layout_marginStart="68dp"
             android:layout_marginTop="1dp"
+            android:textColor="#663E20"
             android:layout_marginBottom="20dp"
             android:fontFamily="@font/baloo_da"
             android:text="JOY"
             android:textAlignment="center"
-            android:textColor="#663E20"
             android:textSize="20sp"
             android:textStyle="normal"
             app:layout_constraintBottom_toTopOf="@+id/fear"
@@ -100,35 +102,21 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="364dp"
-            android:layout_height="109dp"
-            android:layout_marginTop="144dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="156dp"
             android:fontFamily="@font/baloo_da"
-            android:letterSpacing="0"
-            android:text="How are you feeling?"
+            android:text="How are you feeling today?"
             android:textAlignment="center"
             android:textColor="#663E20"
-            android:textSize="37sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.444"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textSize="34sp"
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="364dp"
-            android:layout_height="109dp"
-            android:layout_marginTop="188dp"
-            android:fontFamily="@font/baloo_da"
-            android:letterSpacing="0"
-            android:text=" today?"
-            android:textAlignment="center"
-            android:textColor="#663E20"
-            android:textSize="37sp"
             android:textStyle="bold"
+            android:inputType="textMultiLine"
+            android:singleLine="false"
+            android:maxLines="2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.446"
+            app:layout_constraintHorizontal_bias="0.533"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -202,8 +190,7 @@
             android:id="@+id/deleteButton"
             android:layout_width="62dp"
             android:layout_height="40dp"
-            android:layout_marginBottom="92dp"
-            android:textColor="#663E20"
+            android:layout_marginBottom="96dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -246,6 +233,7 @@
             app:layout_constraintStart_toEndOf="@+id/calm"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.517"
+
             app:srcCompat="@drawable/bored" />
 
         <TextView
@@ -259,14 +247,14 @@
             android:fontFamily="@font/baloo_da"
             android:text="BORED"
             android:textAlignment="center"
+            android:textColor="#663E20"
             android:textSize="20sp"
             android:textStyle="normal"
             app:layout_constraintBottom_toTopOf="@+id/angry"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView4"
             app:layout_constraintTop_toBottomOf="@+id/neutral"
-            android:textColor="#663E20"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

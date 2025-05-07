@@ -43,7 +43,9 @@ public class EmotionsInput extends AppCompatActivity {
         if (selectedLocalDate.equals(currentDate)) {
             questionTextView.setText("How are you feeling today?");
         } else {
-            questionTextView.setText("How are you feeling that day?");
+            questionTextView.setText("How are you feeling\nthat day?");
+
+
         }
         SharedPreferences sharedPreferences = getSharedPreferences("MoodTracker", MODE_PRIVATE);
         currentEmotion = sharedPreferences.getString(selectedDate, "");

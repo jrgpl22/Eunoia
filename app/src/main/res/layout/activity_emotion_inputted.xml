@@ -23,25 +23,27 @@
         android:id="@+id/textCF3"
         android:layout_width="214dp"
         android:layout_height="49dp"
-        android:layout_marginTop="-5dp"
-        android:layout_marginBottom="362dp"
+        android:layout_marginTop="292dp"
+        android:fontFamily="@font/baloo_da"
         android:text="TextView"
         android:textAlignment="center"
+        android:textColor="#663E20"
         android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/emotionCF3" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/dateCNFRM3"
         android:layout_width="234dp"
         android:layout_height="37dp"
         android:layout_marginTop="96dp"
+        android:fontFamily="@font/baloo_da"
         android:text="TextView"
         android:textAlignment="center"
+        android:textColor="#A05B2A"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/emotionCF3"
@@ -63,6 +65,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.034"
         app:srcCompat="@drawable/calm" />
 
     <ImageView
@@ -76,25 +79,23 @@
         app:srcCompat="@drawable/dots" />
 
     <ScrollView
-        android:layout_width="339dp"
-        android:layout_height="340dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="-9dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="7dp"
+        android:layout_width="316dp"
+        android:layout_height="330dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.389"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textCF3"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.927">
 
         <TextView
             android:id="@+id/notesDisplay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/baloo_da"
             android:padding="10dp"
             android:text="Notes will be displayed here"
+            android:textColor="#663E20"
             android:textSize="16sp" />
 
     </ScrollView>
