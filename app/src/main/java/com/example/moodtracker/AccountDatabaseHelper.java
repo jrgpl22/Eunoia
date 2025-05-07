@@ -114,4 +114,70 @@ public class AccountDatabaseHelper extends SQLiteOpenHelper {
             db.close();
         }
     }
+
+    /**
+     * Updates a user's username in the database
+     * @param oldUsername Current username
+     * @param newUsername New username to set
+     * @return true if username was updated successfully
+     */
+    public boolean updateUsername(String oldUsername, String newUsername) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        try {
+            // First, get the user's password
+            Cursor cursor = db.query(
+                    TABLE_ACCOUNTS,
+                    new String[]{COLUMN_PASSWORD},
+                    COLUMN_USERNAME + "=?",
+                    new String[]{oldUsername},
+                    null, null, null
+            );
+
+            if (!cursor.moveToFirst()) {
+                cursor.close();
+                return false;
+            }
+
+            String password = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PASSWORD));
+            cursor.close();
+
+            // Start a transaction to ensure atomicity
+            db.beginTransaction();
+            try {
+                // Delete the old username entry
+                int rowsDeleted = db.delete(
+                        TABLE_ACCOUNTS,
+                        COLUMN_USERNAME + "=?",
+                        new String[]{oldUsername}
+                );
+
+                if (rowsDeleted == 0) {
+                    return false;
+                }
+
+                // Insert the new username with the same password
+                ContentValues values = new ContentValues();
+                values.put(COLUMN_USERNAME, newUsername);
+                values.put(COLUMN_PASSWORD, password);
+
+                long newRowId = db.insert(TABLE_ACCOUNTS, null, values);
+                if (newRowId == -1) {
+                    return false;
+                }
+
+                // If we made it here, mark the transaction as successful
+                db.setTransactionSuccessful();
+                return true;
+            } finally {
+                // End the transaction
+                db.endTransaction();
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error updating username: " + e.getMessage());
+            return false;
+        } finally {
+            db.close();
+        }
+    }
 }

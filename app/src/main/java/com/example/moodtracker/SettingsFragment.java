@@ -1,4 +1,13 @@
 package com.example.moodtracker;
+import android.animation.ObjectAnimator;
+import android.graphics.Color;
+import android.os.Build;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
+
 
 import android.app.AlarmManager;
 import android.app.AlertDialog;
@@ -15,6 +24,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,11 +42,13 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class SettingsFragment extends Fragment {
     private TextView accName;
+    private TextView editUsernameText;
     private Button logoutButton, deleteDataButton, changePasswordButton;
     private Button notificationButton, accountButton, helpButton;
     private ImageView editProfileButton;
     private ShapeableImageView profileImgButton;
     private MoodDatabaseHelper dbHelper;
+    private AccountDatabaseHelper accountDbHelper;
     private String username;
 
     private ActivityResultLauncher<String> imagePickerLauncher;
@@ -46,8 +58,10 @@ public class SettingsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
 
         dbHelper = new MoodDatabaseHelper(requireContext());
+        accountDbHelper = new AccountDatabaseHelper(requireContext());
 
         accName = view.findViewById(R.id.ACC_NAME);
+        editUsernameText = view.findViewById(R.id.editusername);
         logoutButton = view.findViewById(R.id.logout);
         deleteDataButton = view.findViewById(R.id.delete_data);
         notificationButton = view.findViewById(R.id.notifation);
@@ -99,6 +113,9 @@ public class SettingsFragment extends Fragment {
             startActivity(intent);
         });
 
+        // Edit username action
+        editUsernameText.setOnClickListener(v -> showChangeUsernameDialog());
+
         // Edit profile photo using edit button
         editProfileButton.setOnClickListener(v -> imagePickerLauncher.launch("image/*"));
 
@@ -124,6 +141,282 @@ public class SettingsFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void setupButtonEffects() {
+        // List all your buttons
+        Button[] buttons = new Button[] {
+                logoutButton,
+                deleteDataButton,
+                notificationButton,
+                changePasswordButton,
+                accountButton,
+                helpButton
+        };
+
+        // Apply effects to each button
+        for (Button button : buttons) {
+            applyButtonEffects(button);
+        }
+
+        // Apply effects to other clickable views
+        applyClickEffects(editUsernameText);
+        applyClickEffects(editProfileButton);
+        applyClickEffects(profileImgButton);
+    }
+
+    private void applyButtonEffects(final Button button) {
+        button.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        // When button is pressed
+                        animateButtonPress(button);
+                        return false;
+
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_CANCEL:
+                        // When button is released
+                        animateButtonRelease(button);
+                        return false;
+                }
+                return false;
+            }
+        });
+    }
+
+    private void applyClickEffects(final View view) {
+        view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        // When view is pressed
+                        animateViewPress(view);
+                        return false;
+
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_CANCEL:
+                        // When view is released
+                        animateViewRelease(view);
+                        return false;
+                }
+                return false;
+            }
+        });
+    }
+
+    private void animateButtonPress(Button button) {
+        // Scale down slightly
+        button.animate()
+                .scaleX(0.97f)
+                .scaleY(0.97f)
+                .setDuration(100)
+                .start();
+
+        // Add shadow
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            ViewCompat.setElevation(button, 8f);
+        }
+    }
+
+    private void animateButtonRelease(Button button) {
+        // Scale back to normal
+        button.animate()
+                .scaleX(1.0f)
+                .scaleY(1.0f)
+                .setDuration(100)
+                .start();
+
+        // Remove shadow
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            ViewCompat.setElevation(button, 0f);
+        }
+    }
+
+    private void animateViewPress(View view) {
+        // Apply slight darkening effect
+        view.animate()
+                .alpha(0.7f)
+                .scaleX(0.95f)
+                .scaleY(0.95f)
+                .setDuration(100)
+                .start();
+    }
+
+    private void animateViewRelease(View view) {
+        // Return to normal
+        view.animate()
+                .alpha(1.0f)
+                .scaleX(1.0f)
+                .scaleY(1.0f)
+                .setDuration(100)
+                .start();
+    }
+
+// Call setupButtonEffects() at the end of your onCreateView method
+// Add this line right before the "return view;" statement:
+// setupButtonEffects();
+
+    private void showChangeUsernameDialog() {
+        LayoutInflater inflater = requireActivity().getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_change_username, null);
+
+        EditText newUsernameInput = dialogView.findViewById(R.id.new_username);
+
+        new MaterialAlertDialogBuilder(requireContext())
+                .setView(dialogView)
+                .setPositiveButton("Save", (dialog, which) -> {
+                    String newUsername = newUsernameInput.getText().toString().trim();
+                    if (newUsername.isEmpty()) {
+                        Toast.makeText(requireContext(), "Username cannot be empty", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    if (newUsername.length() < 6) {
+                        Toast.makeText(requireContext(), "Username must be at least 6 characters", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    if (newUsername.equals(username)) {
+                        Toast.makeText(requireContext(), "New username is the same as current username", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    if (accountDbHelper.isUsernameExists(newUsername)) {
+                        Toast.makeText(requireContext(), "Username already exists", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    // Update the username in the accounts database
+                    if (updateUsername(username, newUsername)) {
+                        // Update the UI with the new username
+                        accName.setText(newUsername);
+
+                        // Update the SharedPreferences with the new username
+                        SharedPreferences prefs = requireActivity().getSharedPreferences("MoodTracker", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putString("loggedInUser", newUsername);
+                        editor.apply();
+
+                        // Update the class variable
+                        String oldUsername = username;
+                        username = newUsername;
+
+                        // Transfer mood data and profile picture to new username
+                        transferUserData(oldUsername, newUsername);
+
+                        Toast.makeText(requireContext(), "Username updated successfully", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(requireContext(), "Failed to update username", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    private boolean updateUsername(String oldUsername, String newUsername) {
+        // Update username in the AccountDatabaseHelper
+        return accountDbHelper.updateUsername(oldUsername, newUsername);
+    }
+
+    private void transferUserData(String oldUsername, String newUsername) {
+        // 1. Transfer mood data to the new username
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        db.execSQL("UPDATE mood SET username = ? WHERE username = ?",
+                new String[]{newUsername, oldUsername});
+
+        // 2. Transfer profile picture if it exists
+        if (ProfilePictureManager.hasCustomProfilePicture(requireContext(), oldUsername)) {
+            Uri oldImageUri = ProfilePictureManager.getProfilePictureUri(requireContext(), oldUsername);
+            if (oldImageUri != null) {
+                try {
+                    // Save the image with the new username
+                    ProfilePictureManager.saveProfilePicture(requireContext(), newUsername, oldImageUri);
+
+                    // Reload the profile picture
+                    ProfilePictureManager.loadProfilePicture(requireContext(), newUsername, profileImgButton);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(requireContext(), "Error transferring profile picture", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
+        // 3. Transfer notification settings if needed (assuming they're username-specific)
+        SharedPreferences prefs = requireActivity().getSharedPreferences("MoodTracker", MODE_PRIVATE);
+        boolean notificationsEnabled = prefs.getBoolean(oldUsername + "_notifications_enabled", false);
+        int notificationHour = prefs.getInt(oldUsername + "_notification_hour", 20);
+        int notificationMinute = prefs.getInt(oldUsername + "_notification_minute", 0);
+
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean(newUsername + "_notifications_enabled", notificationsEnabled);
+        editor.putInt(newUsername + "_notification_hour", notificationHour);
+        editor.putInt(newUsername + "_notification_minute", notificationMinute);
+
+        // 4. Remove old username preferences
+        editor.remove(oldUsername + "_notifications_enabled");
+        editor.remove(oldUsername + "_notification_hour");
+        editor.remove(oldUsername + "_notification_minute");
+        editor.apply();
+
+        // 5. Update notifications
+        updateNotificationsForNewUsername(oldUsername, newUsername);
+    }
+
+    private void updateNotificationsForNewUsername(String oldUsername, String newUsername) {
+        // Cancel notifications for the old username
+        AlarmManager alarmManager = (AlarmManager) requireContext().getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(requireContext(), AlarmReceiver.class);
+        intent.setAction("MOOD_REMINDER_ALARM");
+        intent.putExtra("username", oldUsername);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                requireContext(),
+                oldUsername.hashCode(),
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+        );
+
+        alarmManager.cancel(pendingIntent);
+
+        // Recreate notifications for the new username if they were enabled
+        SharedPreferences prefs = requireActivity().getSharedPreferences("MoodTracker", MODE_PRIVATE);
+        boolean notificationsEnabled = prefs.getBoolean(newUsername + "_notifications_enabled", false);
+
+        if (notificationsEnabled) {
+            int hour = prefs.getInt(newUsername + "_notification_hour", 20);
+            int minute = prefs.getInt(newUsername + "_notification_minute", 0);
+
+            // This assumes there's a static method in some notification helper class
+            // If not, you'd need to implement the logic to reschedule notifications
+            // NotificationHelper.scheduleNotification(requireContext(), newUsername, hour, minute);
+
+            // Example implementation if no helper class exists:
+            // Intent newIntent = new Intent(requireContext(), AlarmReceiver.class);
+            // newIntent.setAction("MOOD_REMINDER_ALARM");
+            // newIntent.putExtra("username", newUsername);
+            // PendingIntent newPendingIntent = PendingIntent.getBroadcast(
+            //         requireContext(),
+            //         newUsername.hashCode(),
+            //         newIntent,
+            //         PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+            // );
+            // Calendar calendar = Calendar.getInstance();
+            // calendar.set(Calendar.HOUR_OF_DAY, hour);
+            // calendar.set(Calendar.MINUTE, minute);
+            // calendar.set(Calendar.SECOND, 0);
+            // if (calendar.getTimeInMillis() <= System.currentTimeMillis()) {
+            //     calendar.add(Calendar.DAY_OF_YEAR, 1);
+            // }
+            // alarmManager.setRepeating(
+            //         AlarmManager.RTC_WAKEUP,
+            //         calendar.getTimeInMillis(),
+            //         AlarmManager.INTERVAL_DAY,
+            //         newPendingIntent
+            // );
+        }
     }
 
     private void openAboutPage() {
@@ -189,6 +482,9 @@ public class SettingsFragment extends Fragment {
         super.onDestroy();
         if (dbHelper != null) {
             dbHelper.close();
+        }
+        if (accountDbHelper != null) {
+            accountDbHelper.close();
         }
     }
 }
