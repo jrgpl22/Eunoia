@@ -110,34 +110,38 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/editbtn"
-        android:layout_width="28dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="202dp"
-        android:backgroundTint="#00FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.154"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.002" />
+    <!-- Changed from ImageView to ShapeableImageView -->
 
     <ImageView
+        android:id="@+id/editbtn"
+        android:layout_width="21dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="215dp"
+        android:layout_marginBottom="498dp"
+        android:backgroundTint="#00FFFFFF"
+        android:src="@drawable/editbtnpfl"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/profileimg"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="90dp"
+        android:layout_height="88dp"
         android:layout_gravity="center"
-        android:layout_marginTop="120dp"
-        android:background="@drawable/profile_background"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="103dp"
+        android:layout_marginBottom="8dp"
         android:scaleType="centerCrop"
         android:src="@drawable/profile"
-        android:text=""
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.189"
+        app:layout_constraintHorizontal_bias="0.17"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.059"
+        app:shapeAppearanceOverlay="@style/CircleShape" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

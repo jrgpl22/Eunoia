@@ -11,18 +11,21 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import androidx.activity.result.ActivityResultCallback;
+import android.widget.Toast;
+
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
+
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.imageview.ShapeableImageView;
+
 import java.io.InputStream;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -30,8 +33,9 @@ import static android.content.Context.MODE_PRIVATE;
 public class SettingsFragment extends Fragment {
     private TextView accName;
     private Button logoutButton, deleteDataButton, changePasswordButton;
-    private Button notificationButton, editProfileButton, accountButton, helpButton;
-    private ImageView profileImgButton; // ✅ Changed to ImageView
+    private Button notificationButton, accountButton, helpButton;
+    private ImageView editProfileButton;
+    private ShapeableImageView profileImgButton;
     private MoodDatabaseHelper dbHelper;
     private String username;
 
@@ -51,12 +55,37 @@ public class SettingsFragment extends Fragment {
         accountButton = view.findViewById(R.id.accountButton);
         helpButton = view.findViewById(R.id.helpButton);
         editProfileButton = view.findViewById(R.id.editbtn);
-        profileImgButton = view.findViewById(R.id.profileimg); // ✅ Using ImageView
+        profileImgButton = view.findViewById(R.id.profileimg);
 
         SharedPreferences prefs = requireActivity().getSharedPreferences("MoodTracker", MODE_PRIVATE);
         username = prefs.getString("loggedInUser", "");
         accName.setText(username);
 
+        // Load the profile picture using the new manager
+        ProfilePictureManager.loadProfilePicture(requireContext(), username, profileImgButton);
+
+        // Launcher for selecting a new image (only used by edit button)
+        imagePickerLauncher = registerForActivityResult(
+                new ActivityResultContracts.GetContent(),
+                uri -> {
+                    if (uri != null) {
+                        try {
+                            // Use the ProfilePictureManager to save the profile picture
+                            if (ProfilePictureManager.saveProfilePicture(requireContext(), username, uri)) {
+                                // Reload the profile picture
+                                ProfilePictureManager.loadProfilePicture(requireContext(), username, profileImgButton);
+                                Toast.makeText(requireContext(), "Profile picture updated", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(requireContext(), "Failed to save profile picture", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Toast.makeText(requireContext(), "Error updating profile picture: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+        // Button actions
         logoutButton.setOnClickListener(v -> showLogoutDialog());
         deleteDataButton.setOnClickListener(v -> showDeleteDataDialog());
         notificationButton.setOnClickListener(v -> {
@@ -70,48 +99,45 @@ public class SettingsFragment extends Fragment {
             startActivity(intent);
         });
 
-        editProfileButton.setOnClickListener(v -> {
-            imagePickerLauncher.launch("image/*");
+        // Edit profile photo using edit button
+        editProfileButton.setOnClickListener(v -> imagePickerLauncher.launch("image/*"));
+
+        // View profile image when image is clicked
+        profileImgButton.setOnClickListener(v -> {
+            Intent intent = new Intent(requireContext(), ImgPreviewActivity.class);
+
+            // Check if the user has a custom profile picture
+            if (ProfilePictureManager.hasCustomProfilePicture(requireContext(), username)) {
+                Uri imageUri = ProfilePictureManager.getProfilePictureUri(requireContext(), username);
+                if (imageUri != null) {
+                    intent.putExtra("imageUri", imageUri.toString());
+                    intent.putExtra("isDefaultImage", false);
+                } else {
+                    intent.putExtra("isDefaultImage", true);
+                }
+            } else {
+                // Show default image in preview activity
+                intent.putExtra("isDefaultImage", true);
+            }
+
+            startActivity(intent);
         });
-
-        imagePickerLauncher = registerForActivityResult(
-                new ActivityResultContracts.GetContent(),
-                new ActivityResultCallback<Uri>() {
-                    @Override
-                    public void onActivityResult(Uri uri) {
-                        if (uri != null) {
-                            try {
-                                InputStream inputStream = requireContext().getContentResolver().openInputStream(uri);
-                                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-
-                                // Set the new profile image
-                                profileImgButton.setImageBitmap(bitmap);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                });
-
-
 
         return view;
     }
 
     private void openAboutPage() {
-        Intent intent = new Intent(requireContext(), AboutActivity.class);
-        startActivity(intent);
+        startActivity(new Intent(requireContext(), AboutActivity.class));
     }
 
     private void openHelpPage() {
-        Intent intent = new Intent(requireContext(), HelpActivity.class);
-        startActivity(intent);
+        startActivity(new Intent(requireContext(), HelpActivity.class));
     }
 
     private void showDeleteDataDialog() {
         new MaterialAlertDialogBuilder(requireContext())
                 .setTitle("Delete All Data")
-                .setMessage("Are you sure you want to delete all your mood data? This action cannot be undone.")
+                .setMessage("Are you sure you want to delete all your mood data?")
                 .setPositiveButton("Delete", (dialog, which) -> {
                     SQLiteDatabase db = dbHelper.getWritableDatabase();
                     db.delete("mood", "username = ?", new String[]{username});
@@ -133,9 +159,7 @@ public class SettingsFragment extends Fragment {
                 .setPositiveButton("Yes", (dialog, which) -> {
                     cancelUserNotifications();
                     SharedPreferences prefs = requireActivity().getSharedPreferences("MoodTracker", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = prefs.edit();
-                    editor.remove("loggedInUser");
-                    editor.apply();
+                    prefs.edit().remove("loggedInUser").apply();
                     Intent intent = new Intent(getActivity(), Entrance.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
