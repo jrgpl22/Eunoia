@@ -92,7 +92,7 @@
         android:id="@+id/ACC_NAME"
         android:layout_width="152dp"
         android:layout_height="22dp"
-        android:fontFamily="@font/baloo_da"
+        android:fontFamily="@font/baloo"
         android:text="TextView"
         android:textAlignment="center"
         android:textColor="#FAEEE5"
